@@ -531,9 +531,6 @@ class Channel(models.Model):
     @api.multi
     def channel_join_and_get_info(self):
         self.ensure_one()
-        if self.channel_type == 'channel' and not self.email_send:
-            notification = _('<div class="o_mail_notification">joined <a href="#" class="o_channel_redirect" data-oe-id="%s">#%s</a></div>') % (self.id, self.name,)
-            self.message_post(body=notification, message_type="notification", subtype="mail.mt_comment")
         self.action_follow()
 
         channel_info = self.channel_info()[0]
